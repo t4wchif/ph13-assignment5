@@ -12,8 +12,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
-<body>
-
+<body class="bg-[#F8FAFC]">
+  <div id="login-page" class="min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md text-center"><i
+        class="fab fa-github text-6xl mb-4 text-gray-800"></i>
+      <h1 class="text-2xl font-bold text-gray-800">GitHub Issues Tracker</h1>
+      <p class="text-[#64748B] mb-6 text-sm">Please sign in to your account</p>
+      <div class="space-y-4 text-left">
+        <div><label class="block text-sm font-medium text-gray-700">Username</label><input type="text" id="username"
+            placeholder="Enter username"
+            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
+          <p class="text-sm text-[#4A00FF] mt-1">Default: admin</p>
+        </div>
+        <div><label class="block text-sm font-medium text-gray-700">Password</label><input type="password" id="password"
+            placeholder="Enter password"
+            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
+          <p class="text-sm text-[#4A00FF] mt-1">Default: admin123</p>
+        </div><button onclick="handleLogin()"
+          class="w-full bg-[#4A00FF] text-white py-2 rounded-lg font-semibold hover:bg-[#3B00CC] transition">Sign
+          In</button>
+      </div>
+      <div class="mt-6 p-4 bg-white rounded-lg border border-dashed border-gray-300">
+        <p class="text-xs font-bold text-gray-800 uppercase mb-2">Demo Credentials</p>
+        <p class="text-sm text-gray-600">Username: admin <br> Password: admin123</p>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
