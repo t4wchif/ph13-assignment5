@@ -10,6 +10,28 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    .loader {
+      border-top-color: #7c3aed;
+      animation: spinner 1.5s linear infinite;
+    }
+
+    @keyframes spinner {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .active-tab {
+      background-color: #4f46e5 !important;
+      color: white !important;
+    }
+  </style>
+  <script src="index.js" defer></script>
 </head>
 
 <body class="bg-[#F8FAFC]">
@@ -84,7 +106,7 @@
       <div id="issue-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       </div>
     </div>
-    <div id="issue-modal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 z-60 hidden">
+    <div id="issue-modal" class="fixed inset-0 bg-black/35 items-center justify-center p-4 z-60 hidden">
       <div class="bg-white rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl animate-scaleIn">
         <div id="modal-content" class="p-8">
 
