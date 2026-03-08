@@ -146,7 +146,7 @@ const issuesData = [
     id: 12,
     title: 'Footer not displaying correctly on Safari',
     description:
-      'The footer overlaps with content on Safari browser. CSS issue with flexbox layout.',
+      'The footer overlaps with content on Safari browser. CSS issue with flex box layout.',
     status: 'open',
     labels: ['bug'],
     priority: 'low',
@@ -667,4 +667,51 @@ function handleLogin() {
   } else {
     alert('Invalid Credentials! Use admin/admin123');
   }
+}
+
+function renderIssues(filter, data = issuesData) {
+  const grid = document.getElementById('issue-grid');
+  const spinner = document.getElementById('loading-spinner');
+  grid.innerHTML = '';
+  spinner.classList.remove('hidden');
+
+  setTimeout(() => {
+    spinner.classList.add('hidden');
+    let filtered = data;
+    if (filter !== 'all') {
+      filtered = data.filter(issue => issue.status === filter);
+    }
+    document.getElementById('issue-count-text').innerText =
+      `${filtered.length} Issues`;
+    filtered.forEach(issue => {
+      const topBorder =
+        issue.status === 'open' ? 'border-t-green-500' : 'border-t-purple-500';
+      const priorityColor =
+        issue.priority === 'high'
+          ? 'text-red-500'
+          : issue.priority === 'medium'
+            ? 'text-amber-500'
+            : 'text-gray-400';
+      const card = `
+                <div onclick="openModal(${issue.id})" class="bg-white p-5 rounded-xl shadow-sm border-t-4 ${topBorder} hover:shadow-md transition cursor-pointer flex flex-col justify-between h-full">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                            <i class="fas fa-circle-dot ${issue.status === 'open' ? 'text-green-500' : 'text-purple-500'} text-xs"></i>
+                            <span class="text-[10px] font-bold uppercase tracking-wider ${priorityColor}">${issue.priority}</span>
+                        </div>
+                        <h3 class="font-bold text-gray-800 text-sm line-clamp-1 mb-1">${issue.title}</h3>
+                        <p class="text-xs text-gray-500 line-clamp-2 mb-3">${issue.description}</p>
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            ${issue.labels.map(l => `<span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase ${l === 'bug' ? 'bg-red-50 text-red-600' : 'bg-[#EEF2FF] text-[#4F46E5]'}">${l}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center pt-3 border-t border-gray-50 text-[11px] text-gray-400">
+                        <span>#${issue.id} by <span class="text-gray-600 font-medium">${issue.author}</span></span>
+                        <span>${new Date(issue.createdAt).toLocaleDateString()}</span>
+                    </div>
+                </div>
+            `;
+      grid.innerHTML += card;
+    });
+  }, 500);
 }
