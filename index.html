@@ -54,6 +54,46 @@
         </div>
       </div>
     </nav>
+    <div class="max-w-7xl mx-auto px-4 mt-8">
+      <div class="flex justify-center mb-8">
+        <div class="bg-white p-1 rounded-xl shadow-sm inline-flex"><button onclick="filterIssues('all')" id="btn-all"
+            class="tab-btn px-6 py-2 rounded-lg text-sm font-medium text-gray-600 transition active-tab">All</button><button
+            onclick="filterIssues('open')" id="btn-open"
+            class="tab-btn px-6 py-2 rounded-lg text-sm font-medium text-gray-600 transition">Open</button><button
+            onclick="filterIssues('closed')" id="btn-closed"
+            class="tab-btn px-6 py-2 rounded-lg text-sm font-medium text-gray-600 transition">Closed</button>
+        </div>
+      </div>
+      <div class="flex justify-between items-center mb-6 bg-white p-6 rounded-xl shadow-sm">
+        <div class="flex items-center gap-4">
+          <div class="p-3 bg-[#4A00FF] rounded-lg text-white"><i class="fas fa-list-check text-xl"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-gray-800" id="issue-count-text">0 Issues</h2>
+            <p class="text-sm text-gray-500">Track and manage your project issues</p>
+          </div>
+        </div>
+        <div class="hidden sm:flex gap-4"><span class="flex items-center gap-2 text-sm text-gray-600"><span
+              class="w-2 h-2 rounded-full bg-green-600"></span>Open</span><span
+            class="flex items-center gap-2 text-sm text-gray-600"><span
+              class="w-2 h-2 rounded-full bg-purple-600"></span>Closed</span></div>
+      </div>
+      <div id="loading-spinner" class="flex justify-center items-center py-20">
+        <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+      </div>
+      <div id="issue-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      </div>
+    </div>
+    <div id="issue-modal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4 z-60 hidden">
+      <div class="bg-white rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl animate-scaleIn">
+        <div id="modal-content" class="p-8">
+
+        </div>
+        <div class="px-8 py-4 bg-gray-50 flex justify-end border-t"><button onclick="closeModal()"
+            class="bg-[#4A00FF] text-white px-8 py-2 rounded-lg font-medium hover:bg-[#3a00cc] transition">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 
