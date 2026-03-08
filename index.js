@@ -263,7 +263,7 @@ const issuesData = [
     id: 21,
     title: 'Implement two-factor authentication',
     description:
-      'Add 2FA support using TOTP for enhanced security on user accounts.',
+      'Add 2FA support using for enhanced security on user accounts.',
     status: 'open',
     labels: ['enhancement'],
     priority: 'high',
@@ -714,4 +714,59 @@ function renderIssues(filter, data = issuesData) {
       grid.innerHTML += card;
     });
   }, 500);
+}
+function filterIssues(type) {
+  currentFilter = type;
+  document
+    .querySelectorAll('.tab-btn')
+    .forEach(btn => btn.classList.remove('active-tab'));
+  document.getElementById(`btn-${type}`).classList.add('active-tab');
+  renderIssues(type);
+}
+function handleSearch() {
+  const query = document.getElementById('search-input').value.toLowerCase();
+  const searchedData = issuesData.filter(
+    issue =>
+      issue.title.toLowerCase().includes(query) ||
+      issue.description.toLowerCase().includes(query),
+  );
+  renderIssues(currentFilter, searchedData);
+}
+function openModal(id) {
+  const issue = issuesData.find(i => i.id === id);
+  const modal = document.getElementById('issue-modal');
+  const content = document.getElementById('modal-content');
+
+  content.innerHTML = `
+        <div class="flex justify-between items-start mb-4">
+            <h2 class="text-2xl font-bold text-gray-800">${issue.title}</h2>
+        </div>
+        <div class="flex items-center gap-3 mb-6">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold ${issue.status === 'open' ? 'bg-green-100 text-green-700' : 'bg-purple-100 text-purple-700'}">
+                <i class="fas fa-circle-check mr-1"></i> ${issue.status.charAt(0).toUpperCase() + issue.status.slice(1)}
+            </span>
+            <span class="text-sm text-gray-500">Opened by <b>${issue.author}</b> on ${new Date(issue.createdAt).toLocaleDateString()}</span>
+        </div>
+        <div class="flex flex-wrap gap-2 mb-6">
+            ${issue.labels.map(l => `<span class="px-3 py-1 rounded bg-gray-100 text-gray-600 text-xs font-bold uppercase">${l}</span>`).join('')}
+        </div>
+        <div class="bg-gray-50 p-4 rounded-xl mb-6 border border-gray-100">
+            <p class="text-gray-700 leading-relaxed">${issue.description}</p>
+        </div>
+        <div class="grid grid-cols-2 gap-8">
+            <div>
+                <p class="text-xs font-bold text-gray-400 uppercase mb-1">Assignee</p>
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-[#E0E7FF] flex items-center justify-center text-[#4F46E5] font-bold text-xs">${issue.author[0].toUpperCase()}</div>
+                    <span class="text-sm font-medium text-gray-700">${issue.author}</span>
+                </div>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-gray-400 uppercase mb-1">Priority</p>
+                <span class="text-sm font-bold uppercase ${issue.priority === 'high' ? 'text-red-500' : issue.priority === 'medium' ? 'text-amber-500' : 'text-green-500'}">${issue.priority}</span>
+            </div>
+        </div>
+    `;
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
 }
