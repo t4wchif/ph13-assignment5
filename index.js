@@ -770,6 +770,7 @@ function openModal(id) {
   modal.classList.remove('hidden');
   modal.classList.add('flex');
 }
+
 function closeModal() {
   document.getElementById('issue-modal').classList.add('hidden');
 }
